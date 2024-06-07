@@ -13,6 +13,11 @@ def main():
     # required and which aren't. Then we can provide default values for some variables.
     parser = argparse.ArgumentParser()
     parser.add_argument('-config', help="Config file location *.yml", action='append', required=True)
+    
+    parser.add_argument("-smiles_input_file", dest="smiles_input_file")
+    parser.add_argument("-vocab_path", dest="vocab_path")
+    parser.add_argument("-model_path", dest="model_path")
+    parser.add_argument("-output_directory", dest="output_directory")
     params = parser.parse_args()
 
     for conf_fname in params.config:
