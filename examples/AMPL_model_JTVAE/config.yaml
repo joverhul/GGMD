@@ -1,26 +1,26 @@
-model_type: 'jtnn-fnl'
+model_type: 'jtvae'
 
-smiles_input_file: '../LogP_AutoGrow/zinc_smiles.txt'
+smiles_input_file: '/path/to/GGMD/examples/LogP_AutoGrow/zinc_smiles.txt'
 output_directory: '/path/to/output/directory' #where the population will be saved as an output
 scorer_type: 'ampl_model'
-num_epochs: 2
+num_epochs: 5
 
 #Selection/Optimization params
 optimizer_type: 'geneticoptimizer'
-tourn_size: 15
-mate_prob: 0.7
+selection_type: "roulette" #roulette or tournament are accepted
+selection_pool_size: 5 #Previously called the tourn_size
 mutate_prob: 0.1
-mutation_std: 1
-max_clones: 1
+mutation_std: 0.25 #NEEDS FURTHER REVIEW AND MODIFICATION TO YOUR PROBLEM
+max_clones: 1 #DEPENDS ON HOW MANY COPIES OF ONE MOLECULE YOU WANT. MORE ALLOWS FOR CONVERGENCE, LESS ENCOURAGES DIVERSITY
 optima_type: "maxima"
-selection_type: "tournament"
-elite_perc: 0
+elite_ratio: 0.15 #ELITE POPULATION GUARENTEES THE SURVIVAL OF THE TOP X MOLECULES
+sample_with_replacement: False #False means that during selection, selected parents will not be removed from the pool for parents.
 
 initial_pop_size: 50
 max_population: 50
 
 #Generative model parameters:
-##FNL JTVAE specific
+##JTVAE specific
 vocab_path: '/path/to/GGMD/examples/LogP_JTVAE/all_vocab.txt'
 model_path: '/path/to/GGMD/examples/LogP_JTVAE/model.epoch-35'
 
